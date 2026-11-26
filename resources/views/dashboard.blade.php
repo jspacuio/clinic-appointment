@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+<<<<<<< Updated upstream
 @php
     $clinicRole = session('clinic_role', 'Admin');
     $appointments = [
@@ -208,3 +209,32 @@
     </section>
 @endif
 @endsection
+=======
+@section('title', 'Dashboard')
+@section('page-title', 'Clinic Appointment Dashboard')
+@section('page-subtitle', 'Step 1.2 • Valex Layout Verification')
+
+@section('content')
+<div class="row row-sm">
+    <div class="col-xl-4 col-lg-6 col-md-6">
+        <div class="card custom-card">
+            <div class="card-body">
+                <p class="mb-1 tx-12 text-uppercase text-muted">Logged-In User</p>
+                <h5 class="mb-1">{{ auth()->user()->name }}</h5>
+                <span class="text-muted small">{{ auth()->user()->email }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-6 col-md-6">
+        <div class="card custom-card">
+            <div class="card-body">
+                <p class="mb-1 tx-12 text-uppercase text-muted">Project Group</p>
+                <h5 class="mb-1">Group 03 — Clinic Appointment</h5>
+                <span class="text-muted small">Laravel + Blade + Valex</span>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+>>>>>>> Stashed changes

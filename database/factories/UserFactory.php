@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,10 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'role' => UserRole::Admin,
+            'phone' => '(555) '.fake()->numerify('###-####'),
+            'is_active' => true,
+            'last_active_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -38,8 +43,43 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => UserRole::Admin,
+        ]);
+    }
+
+    public function doctor(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => UserRole::Doctor,
+        ]);
+    }
+
+    public function receptionist(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => UserRole::Receptionist,
+        ]);
+    }
+
+    public function patient(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => UserRole::Patient,
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'is_active' => false,
         ]);
     }
 }
